@@ -10,14 +10,51 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body { background:#0f1224; color:#fff; font-family:sans-serif; margin:0; }
-    .page { display:none; padding:20px; }
-    .active { display:block; }
-    input, select, button { width:100%; margin:5px 0; padding:10px; border-radius:6px; border:1px solid #444; background:#121224; color:#eee; }
-    button { background:#ffcc00; color:#000; font-weight:bold; cursor:pointer; }
-    button:hover { background:#00cc66; color:#fff; }
-    .section { margin-top:20px; padding:15px; border:1px solid #333; border-radius:8px; background:#1a1a33; }
-  </style>
+  body { 
+    background:#0f1224; 
+    color:#fff; 
+    font-family:sans-serif; 
+    margin:0; 
+  }
+  .page { 
+    display:none; 
+    min-height:100vh; 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center; 
+    text-align:center; 
+    padding:20px; 
+  }
+  .active { display:flex; }
+  input, select, button { 
+    width:100%; 
+    max-width:300px; 
+    margin:5px 0; 
+    padding:10px; 
+    border-radius:6px; 
+    border:1px solid #444; 
+    background:#121224; 
+    color:#eee; 
+  }
+  button { 
+    background:#ffcc00; 
+    color:#000; 
+    font-weight:bold; 
+    cursor:pointer; 
+  }
+  button:hover { background:#00cc66; color:#fff; }
+  .section { 
+    margin-top:20px; 
+    padding:15px; 
+    border:1px solid #333; 
+    border-radius:8px; 
+    background:#1a1a33; 
+    width:100%; 
+    max-width:350px; 
+    text-align:left; 
+  }
+</style>
 </head>
 <body>
 
