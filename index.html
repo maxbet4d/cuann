@@ -28,7 +28,45 @@ let currentUser = null;
 /* (CSS sama seperti yang kamu beri, sedikit dirapikan) */
 body { margin:0;font-family:Arial,sans-serif;background:#0a0f1c;color:white;overflow-x:hidden; }
 header { background:#111a33; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.4); flex-wrap:wrap; }
-.logo { font-size:22px; font-weight:bold; color:#FFD700; letter-spacing:1px; flex-shrink:0; }
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 45px;   /* tinggi logo */
+  width: auto;
+  display: block;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .header-right {
+    width: 100%;
+    align-items: center;
+  }
+  .login-form {
+    width: 100%;
+    justify-content: center;
+  }
+  .login-form input,
+  .login-form button {
+    width: 100%;
+    max-width: 100%;
+  }
+}
 .login-form { display:flex; gap:10px; flex-wrap:wrap; flex-grow:1; justify-content:flex-end; }
 .login-form input { padding:6px; border-radius:5px; border:none; outline:none; min-width:100px; max-width:150px; flex:1 1 auto; }
 .login-form button { padding:6px 12px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; max-width:120px; flex:1 1 auto; }
@@ -142,16 +180,23 @@ header{flex-direction:column;align-items:flex-start}
 
 <!-- User Area -->
 <div id="userarea" class="page">
+  
 <header>
-<div class="logo">JOKOWI-TOTO - User Area</div>
-<div class="menu">
-<a href="#" onclick="showHistory()">History</a>
-<a href="#" onclick="showPage('deposit')">Deposit</a>
-<a href="#" onclick="showWithdraw()">Withdraw</a>
-<a href="#" onclick="alert('Rekening Sudah Terdaftar')">Rekening</a>
-<a href="#" onclick="alert('Memo belum tersedia')">Memo</a>
-<a href="#" onclick="logout()">Logout</a>
-</div>
+  <div class="logo">
+    <img src="maxbet.png" alt="MAXBET Logo" />
+  </div>
+
+  <div class="header-right">
+    <div class="login-form">
+      <input type="text" id="userLogin" placeholder="User ID" />
+      <input type="password" id="passLogin" placeholder="Kata Sandi" />
+      <button class="btn-login" onclick="login()">Login</button>
+      <button class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+    </div>
+    <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
+      💬 Hubungi WhatsApp / Live Chat
+    </a>
+  </div>
 </header>
 <div class="container">
 <div class="grid">
