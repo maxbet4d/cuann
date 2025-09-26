@@ -27,23 +27,23 @@ let currentUser = null;
 <style>
 /* (CSS sama seperti yang kamu beri, sedikit dirapikan) */
 body { margin:0;font-family:Arial,sans-serif;background:#0a0f1c;color:white;overflow-x:hidden; }
-header { background:#111a33; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.4); flex-wrap:wrap; }
-.logo {
+header {
+  background: #111a33;
+  padding: 10px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  flex-wrap: wrap;
+  gap: 10px; /* Tambahkan sedikit gap antar elemen */
 }
 
-/* Logo */
-.logo {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 .logo img {
-  height: 155px;
+  height: 100px; /* Ukuran lebih kecil agar tidak mengganggu layout */
   width: auto;
-  display: block;
 }
 /* Bagian kanan */
 .header-right {
