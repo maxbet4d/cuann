@@ -3,303 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MAXBET4D - Full Web Firebase</title>
+  <title>MAXBET4D - Firebase</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
   <style>
-    :root {
-      --color-bg: #0f1224;
-      --color-primary: #ffcc00;
-      --color-secondary: #1e1e2f;
-      --color-accent: #00cc66;
-      --color-text: #ffffff;
-      --color-muted: #aaaaaa;
-      --radius: 8px;
-      --transition: 0.3s ease;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-    }
-
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: var(--color-secondary);
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-
-    .logo img {
-      height: 60px;
-      width: auto;
-    }
-
-    .header-right {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-end;
-    }
-
-    .login-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .login-form input {
-  width: 100%;
-  height: auto;          /* otomatis sesuai isi teks */
-  padding: 8px 12px;     /* padding cukup untuk teks nyaman */
-  font-size: 14px;
-  color: #eee;
-  background-color: #121224;
-  border: 1px solid #444;
-  border-radius: 6px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-    .login-form button {
-      padding: 0.5rem 1rem;
-      background: var(--color-primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-
-    .login-form button:hover {
-      background: var(--color-accent);
-    }
-
-    .btn-wa {
-      background: #25D366;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: bold;
-      transition: background var(--transition);
-    }
-
-    .btn-wa:hover {
-      background: #1ebe5d;
-    }
-
-    .banner {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      text-align: center;
-      padding: 2rem 1rem;
-      margin: 1rem auto;
-      border-radius: var(--radius);
-      max-width: 100%;
-      color: var(--color-primary);
-      box-shadow: var(--shadow);
-    }
-
-    .banner h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .banner p {
-      color: var(--color-muted);
-      font-size: 1rem;
-    }
-
-    .btn-main {
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--color-primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: bold;
-      transition: background var(--transition);
-      cursor: pointer;
-    }
-
-    .btn-main:hover {
-      background: var(--color-accent);
-    }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .game-card {
-      background: #1f1f1f;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      text-align: center;
-      transition: transform var(--transition);
-    }
-
-    .game-card:hover {
-      transform: translateY(-4px) scale(1.03);
-    }
-
-    .game-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .game-card div {
-      padding: 0.5rem;
-      font-weight: bold;
-    }
-
-    /* Mobile Optimization */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .header-right {
-        align-items: flex-start;
-        width: 100%;
-      }
-
-      .login-form {
-        width: 100%;
-        flex-direction: column;
-      }
-
-      .login-form input {
-  width: 100%;
-  height: auto;          /* otomatis sesuai isi teks */
-  padding: 8px 12px;     /* padding cukup untuk teks nyaman */
-  font-size: 14px;
-  color: #eee;
-  background-color: #121224;
-  border: 1px solid #444;
-  border-radius: 6px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-
-      .btn-wa {
-        width: 100%;
-        text-align: center;
-      }
-
-      .banner h1 {
-        font-size: 1.5rem;
-      }
-
-      .banner p {
-        font-size: 0.95rem;
-      }
-
-      .game-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    body { background:#0f1224; color:#fff; font-family:sans-serif; margin:0; }
+    .page { display:none; padding:20px; }
+    .active { display:block; }
+    input, select, button { width:100%; margin:5px 0; padding:10px; border-radius:6px; border:1px solid #444; background:#121224; color:#eee; }
+    button { background:#ffcc00; color:#000; font-weight:bold; cursor:pointer; }
+    button:hover { background:#00cc66; color:#fff; }
+    .section { margin-top:20px; padding:15px; border:1px solid #333; border-radius:8px; background:#1a1a33; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="maxbet.png" alt="MAXBET Logo">
-    </div>
-    <div class="header-right">
-      <form class="login-form">
-        <input type="text" id="userLogin" placeholder="User ID" />
-        <input type="password" id="passLogin" placeholder="Kata Sandi" />
-        <button type="button" onclick="login()">Login</button>
-        <button type="button" onclick="showPage('daftar')">Daftar</button>
-      </form>
-      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
-    </div>
-  </header>
-  <!-- Form Daftar (disembunyikan default) -->
-<div id="registerPage" style="display:none; background:#121224; padding:20px; border-radius:8px; max-width:400px; margin: 1rem auto; color: #eee;">
-  <h2>Daftar Akun Baru</h2>
-  <form id="registerForm">
-    <input type="text" id="regUserId" placeholder="User ID" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-    <input type="email" id="regEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-    <input type="password" id="regPassword" placeholder="Kata Sandi" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-    <input type="password" id="regConfirmPassword" placeholder="Konfirmasi Kata Sandi" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-     <input type="text" id="regNamaRekening" placeholder="Nama Rekening" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-    <input type="text" id="regNomorRekening" placeholder="Nomor Rekening" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-    <input type="tel" id="regNoHP" placeholder="No HP" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
 
-    <select id="regBankEwallet" required style="width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
-      <option value="" disabled selected>Pilih Bank / E-Wallet</option>
-      <option value="bca">BCA</option>
-      <option value="bri">BRI</option>
-      <option value="bni">BNI</option>
-      <option value="mandiri">Mandiri</option>
-      <option value="dana">Dana</option>
-      <option value="ovo">OVO</option>
-      <option value="gopay">GoPay</option>
-      <option value="linkaja">LinkAja</option>
-    </select>
-    <button type="submit" style="background: var(--color-primary); color: #000; padding: 10px; border:none; border-radius: 8px; cursor:pointer; width: 100%; font-weight:bold;">Daftar</button>
-  </form>
-  <p style="margin-top: 10px; text-align: center;">
-    Sudah punya akun? 
-    <span style="color: var(--color-primary); cursor:pointer;" onclick="showPage('login')">Login di sini</span>
-  </p>
+<!-- LOGIN -->
+<div id="login" class="page active">
+  <h2>Login</h2>
+  <input type="text" id="userLogin" placeholder="User ID" />
+  <input type="password" id="passLogin" placeholder="Kata Sandi" />
+  <button onclick="login()">Login</button>
+  <p>Belum punya akun? <span style="color:#ffcc00;cursor:pointer" onclick="showPage('register')">Daftar di sini</span></p>
 </div>
 
-  <div class="banner">
-    <h1>🎉 Selamat Datang di MAXBET4D 🎉</h1>
-    <p>Situs Resmi Aman dan Terpercaya. Daftar Sekarang & Menang!</p>
-    <button class="btn-main">Main Sekarang</button>
+<!-- REGISTER -->
+<div id="register" class="page">
+  <h2>Daftar Akun Baru</h2>
+  <form id="registerForm">
+    <input type="text" id="regUserId" placeholder="User ID" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPassword" placeholder="Kata Sandi" required>
+    <input type="password" id="regConfirmPassword" placeholder="Konfirmasi Kata Sandi" required>
+    <input type="text" id="regNamaRekening" placeholder="Nama Rekening" required>
+    <input type="text" id="regNomorRekening" placeholder="Nomor Rekening" required>
+    <input type="tel" id="regNoHP" placeholder="No HP" required>
+    <select id="regBankEwallet" required>
+      <option value="" disabled selected>Pilih Bank / E-Wallet</option>
+      <option value="BCA">BCA</option>
+      <option value="BRI">BRI</option>
+      <option value="BNI">BNI</option>
+      <option value="Mandiri">Mandiri</option>
+      <option value="Dana">Dana</option>
+      <option value="OVO">OVO</option>
+      <option value="GoPay">GoPay</option>
+      <option value="LinkAja">LinkAja</option>
+    </select>
+    <button type="submit">Daftar</button>
+  </form>
+  <p>Sudah punya akun? <span style="color:#ffcc00;cursor:pointer" onclick="showPage('login')">Login di sini</span></p>
+</div>
+
+<!-- USER AREA -->
+<div id="userarea" class="page">
+  <h2>Selamat datang!</h2>
+  <p id="userData">User: - | Balance: Rp 0</p>
+  <p id="bankData"></p>
+  <p id="phoneData"></p>
+
+  <div class="section">
+    <h3>Deposit</h3>
+    <input type="number" id="depositAmount" placeholder="Jumlah Deposit" />
+    <button onclick="deposit()">Kirim Deposit</button>
   </div>
 
-  <div class="game-grid">
-    <div class="game-card">
-      <img src="path/to/game1.jpg" alt="Game 1">
-      <div>Game 1</div>
-    </div>
-    <div class="game-card">
-      <img src="path/to/game2.jpg" alt="Game 2">
-      <div>Game 2</div>
-    </div>
-    <!-- Tambahkan lebih banyak game-card sesuai kebutuhan -->
+  <div class="section">
+    <h3>Withdraw</h3>
+    <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" />
+    <button onclick="withdraw()">Kirim Withdraw</button>
   </div>
-  <script>
-    // Fungsi menampilkan halaman login atau daftar
-  function showPage(page) {
-    const loginPage = document.querySelector('.login-form');
-    const registerPage = document.getElementById('registerPage');
-    if (page === 'login') {
-      loginPage.style.display = 'flex';
-      registerPage.style.display = 'none';
-    } else if (page === 'daftar') {
-      loginPage.style.display = 'none';
-      registerPage.style.display = 'block';
-    }
+
+  <button style="margin-top:20px;" onclick="logout()">Logout</button>
+</div>
+
+<script>
+  // ==== Firebase Config ====
+  const firebaseConfig = {
+    apiKey: "ISI_API_KEY_KAMU",
+    authDomain: "ISI_PROJECT.firebaseapp.com",
+    projectId: "ISI_PROJECT",
+    storageBucket: "ISI_PROJECT.appspot.com",
+    messagingSenderId: "ISI_SENDER_ID",
+    appId: "ISI_APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  let currentUser = null;
+
+  // === Navigasi antar halaman ===
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
   }
 
-  // Fungsi daftar
-  document.getElementById('registerForm').addEventListener('submit', function(e) {
+  // === REGISTER ===
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const userId = document.getElementById('regUserId').value.trim();
     const email = document.getElementById('regEmail').value.trim();
@@ -310,319 +112,133 @@
     const noHP = document.getElementById('regNoHP').value.trim();
     const bankEwallet = document.getElementById('regBankEwallet').value;
 
-    if(password !== confirmPassword) {
-      alert('Kata sandi dan konfirmasi kata sandi tidak cocok!');
+    if (password !== confirmPassword) {
+      alert("Password tidak sama!");
       return;
     }
 
-    // Cek apakah userId sudah ada
-    if(localStorage.getItem('user_' + userId)) {
-      alert('User ID sudah digunakan, silakan pilih yang lain.');
-      return;
+    try {
+      const docSnap = await db.collection('users').doc(userId).get();
+      if (docSnap.exists) {
+        alert("User ID sudah terdaftar!");
+        return;
+      }
+
+      await db.collection('users').doc(userId).set({
+        email, password,
+        namaRekening, nomorRekening,
+        noHP, bankEwallet,
+        balance: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      alert("Pendaftaran berhasil, silakan login.");
+      showPage("login");
+
+    } catch (err) {
+      console.error(err);
+      alert("Gagal daftar.");
     }
-
-    // Simpan data user ke localStorage (JSON string)
-    const userData = {
-      userId,
-      email,
-      password,
-      namaRekening,
-      nomorRekening,
-      noHP,
-      bankEwallet
-    };
-
-    localStorage.setItem('user_' + userId, JSON.stringify(userData));
-    alert('Pendaftaran berhasil! Silakan login.');
-    showPage('login');
   });
 
-   <button onclick="register()">Daftar</button>
-    <br /><br />
-    <button style="background:#ff4444" onclick="showPage('home')">Kembali</button>
-  </div>
-</div>
+  // === LOGIN ===
+  async function login() {
+    const user = document.getElementById('userLogin').value.trim();
+    const pass = document.getElementById('passLogin').value;
 
-<!-- User Area -->
-<div id="userarea" class="page">
-  <header>
-    <div class="logo">
-      <img src="jokowitoto.png" alt="jokowitoto Logo">
-    </div>
-    <div class="menu">
-      <a href="#" onclick="showHistory()">History</a>
-      <a href="#" onclick="showPage('deposit')">Deposit</a>
-      <a href="#" onclick="showWithdraw()">Withdraw</a>
-      <a href="#" onclick="alert('Rekening Sudah Terdaftar')">Rekening</a>
-      <a href="#" onclick="alert('Memo belum tersedia')">Memo</a>
-      <a href="#" onclick="logout()">Logout</a>
-    </div>
-  </header>
-  <div class="container">
-    <div class="grid">
-      <div class="card">
-        <h3>User Data</h3>
-        <p id="userData">User: - | Balance: Rp 0</p>
-        <p id="bankData"></p>
-        <p id="phoneData"></p>
-      </div>
-      <div class="card">
-        <h3>Last Bet/Win Report</h3>
-        <p id="betReport">No Data</p>
-      </div>
-      <div class="card">
-        <h3>Last Deposit/Withdraw Status</h3>
-        <div id="historyList" style="max-height:200px; overflow-y:auto;"></div>
-      </div>
-    </div>
+    if (!user || !pass) { alert("Isi User ID & Password!"); return; }
 
-    <div class="provider-boxes">
-      <div class="provider-card">Pragmatic</div>
-      <div class="provider-card">PG Soft</div>
-      <div class="provider-card">No Limit</div>
-      <div class="provider-card">jili</div>
-    </div>
+    try {
+      const docSnap = await db.collection('users').doc(user).get();
+      if (!docSnap.exists) { alert("User tidak ditemukan!"); return; }
 
-    <div class="game-grid" id="gameGrid"></div>
-  </div>
-</div>
+      const data = docSnap.data();
+      if (data.password !== pass) { alert("Password salah!"); return; }
 
-<!-- Deposit -->
-<div id="deposit" class="page">
-  <div class="form-box" style="max-width:400px;">
-    <h2>💸 Deposit Saldo</h2>
-    <p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
-    <img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
-    <label for="depositAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Deposit (Rp)</label>
-    <input type="number" id="depositAmount" placeholder="Contoh: 100000" />
-    <button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
-    <br /><br />
-    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
-  </div>
-</div>
+      currentUser = { ...data, user };
+      showPage("userarea");
 
-<!-- Withdraw -->
-<div id="withdraw" class="page">
-  <div class="form-box" style="max-width:400px;">
-    <h2>💰 Withdraw Saldo</h2>
-    <p>Data Rekening Anda:</p>
-    <p id="withdrawRekening"></p>
-    <p id="withdrawNama"></p>
-    <label for="withdrawAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Withdraw (Rp)</label>
-    <input type="number" id="withdrawAmount" placeholder="Contoh: 50000" />
-    <button onclick="konfirmasiWithdraw()">Konfirmasi Withdraw</button>
-    <br /><br />
-    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
-  </div>
-</div>
+      updateUserInfo();
 
-<script>
-// --- Game List ---
-const providerGames = {
-  "Pragmatic": [
-    {name:"GATES OF OLYMPUS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus.png"},
-    {name:"GATES OF OLYMPUS SUPER",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus1.png"},
-    {name:"STARLIGHT PRINCESS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/icens1.png"},
-    {name:"STARLIGHT PRINCESS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/inces2.png"},
-    {name:"BUFFALO KING",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/falo1.png"},
-    {name:"POWER OF THOR",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/thor1.png"},
-    {name:"SWEET BONANZA 1000",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/sweet1.png"},
-    {name:"MAHJONG WINS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/wins2.png"}
-  ],
-  "PG Soft": [
-    {name:"MAHJONG WAYS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong1.png"},
-    {name:"MAHJONG WAYS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong2.png"},
-    {name:"WILD BANDITO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bandit1.png"},
-    {name:"MAFIA MAYHEM",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mayhem3.png"},
-    {name:"LUCKY NEKO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/neko2.png"},
-    {name:"WAYS OF THE QILIN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qilin12.png"},
-    {name:"WILD BOUNTY",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bounty.png"},
-    {name:"GALAXY STONE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/galaxy2.png"}
-  ],
-  "No Limit": [
-    {name:"PUNK TOILET",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/punk1.png"},
-    {name:"DEAD WOOD",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/dead.png"},
-    {name:"ROAD RAGE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rage3.png"},
-    {name:"FIRE HOLE 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tnt.png"},
-    {name:"THE CRYPT",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/cry2.png"},
-    {name:"HIGHWAY TO HELL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/hell3.png"},
-    {name:"KILL EM ALL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/kill2.png"},
-    {name:"FLIGHT MODE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/flight.png"}
-  ],
-  "jili": [
-    {name:"PIRATES QUEEN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/pira8.png"},
-    {name:"MEGA ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mega2.png"},
-    {name:"FORTUNE COINS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/co6.png"},
-    {name:"FORTUNE GAMS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tune5.png"},
-    {name:"SUPER ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/ace9.png"},
-    {name:"CRISTAL 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/stal5.png"},
-    {name:"SUPER MAHJONG",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mahj8.png"},
-    {name:"RAPID GEMS 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rapid7.png"}
-  ]
-};
+    } catch (err) {
+      console.error(err);
+      alert("Gagal login.");
+    }
+  }
 
-function populateGameGridByProvider(providerName) {
-  const container = document.getElementById('gameGrid');
-  container.innerHTML = '';
-  const gamesToShow = providerGames[providerName] || [];
-  gamesToShow.forEach(game => {
-    const card = document.createElement('div');
-    card.classList.add('game-card');
-    card.title = game.name;
-    card.innerHTML = `<img src="${game.img}" alt="${game.name}" /><div>${game.name}</div>`;
-    card.onclick = () => alert(`Deposit dulu untuk main: ${game.name}`);
-    container.appendChild(card);
-  });
-}
+  // === LOGOUT ===
+  function logout() {
+    currentUser = null;
+    alert("Logout berhasil!");
+    showPage("login");
+  }
 
-document.querySelectorAll('.provider-card').forEach(el => {
-  const providerName = el.textContent.trim();
-  el.onclick = () => populateGameGridByProvider(providerName);
-});
+  // === UPDATE USER INFO ===
+  function updateUserInfo() {
+    document.getElementById("userData").innerText =
+      `User: ${currentUser.user} | Balance: Rp ${currentUser.balance || 0}`;
+    document.getElementById("bankData").innerText =
+      `Bank: ${currentUser.namaRekening || '-'} (${currentUser.bankEwallet || '-'})`;
+    document.getElementById("phoneData").innerText =
+      `HP: ${currentUser.noHP || '-'}`;
+  }
 
-function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-}
+  // === DEPOSIT ===
+  async function deposit() {
+    const amount = parseInt(document.getElementById("depositAmount").value);
+    if (!amount || amount <= 0) { alert("Masukkan jumlah deposit!"); return; }
 
-async function login() {
-  const user = document.getElementById('userLogin').value.trim();
-  const pass = document.getElementById('passLogin').value;
-  if (!user || !pass) { alert('Isi User & Password'); return; }
-
-  try {
-    const docRef = db.collection('users').doc(user);
-    const docSnap = await docRef.get();
-    if (!docSnap.exists) { alert('User tidak ditemukan'); return; }
-    const data = docSnap.data();
-    if (data.password !== pass) { alert('Password salah'); return; }
-    currentUser = { ...data, user };
-
-    db.collection('users').doc(user).onSnapshot(doc => {
-      const data2 = doc.data();
-      if (!data2) return;
-      currentUser = { ...data2, user };
-      document.getElementById('userData').innerText = `User: ${user} | Balance: Rp ${currentUser.balance || 0}`;
-      document.getElementById('bankData').innerText = `Bank: ${data2.namaRekening || '-'} (${data2.bank || '-'})`;
-      document.getElementById('phoneData').innerText = `HP: ${data2.phone || '-'}`;
-
-      const historyDiv = document.getElementById('historyList');
-      historyDiv.innerHTML = '';
-      db.collection('deposits').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap => {
-        snap.forEach(d => {
-          const dd = d.data();
-          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
-          historyDiv.innerHTML += `<div>Deposit Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
-        });
+    try {
+      await db.collection("deposits").add({
+        user: currentUser.user,
+        amount,
+        status: "pending",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      db.collection('withdraws').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap => {
-        snap.forEach(d => {
-          const dd = d.data();
-          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
-          historyDiv.innerHTML += `<div>Withdraw Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
-        });
+
+      // update balance langsung (opsional, bisa tunggu admin approve)
+      currentUser.balance += amount;
+      await db.collection("users").doc(currentUser.user).update({
+        balance: currentUser.balance
       });
-    });
 
-    showPage('userarea');
-  } catch (err) {
-    console.error(err);
-    alert('Gagal login');
-  }
-}
+      alert("Deposit berhasil dikirim!");
+      updateUserInfo();
 
-async function register() {
-  const user = document.getElementById('newUser').value.trim();
-  const pass = document.getElementById('newPass').value;
-  const rekening = document.getElementById('rekNum').value.trim();
-  const namaRekening = document.getElementById('rekName').value.trim();
-  const phone = document.getElementById('phoneNum').value.trim();
-  const bank = document.getElementById('bankType').value;
-
-  if (!user || !pass || !rekening || !namaRekening || !phone || !bank) {
-    alert('Isi semua field');
-    return;
+    } catch (err) {
+      console.error(err);
+      alert("Gagal deposit.");
+    }
   }
 
-  try {
-    const docSnap = await db.collection('users').doc(user).get();
-    if (docSnap.exists) { alert('User sudah terdaftar'); return; }
-    await db.collection('users').doc(user).set({
-      password: pass,
-      namaRekening,
-      rekening,
-      bank,
-      phone,
-      balance: 0,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert('Akun berhasil didaftarkan');
-    showPage('home');
-  } catch (err) {
-    console.error(err);
-    alert('Gagal daftar');
+  // === WITHDRAW ===
+  async function withdraw() {
+    const amount = parseInt(document.getElementById("withdrawAmount").value);
+    if (!amount || amount <= 0) { alert("Masukkan jumlah withdraw!"); return; }
+    if (amount > currentUser.balance) { alert("Saldo tidak cukup!"); return; }
+
+    try {
+      await db.collection("withdraws").add({
+        user: currentUser.user,
+        amount,
+        status: "pending",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // kurangi balance langsung (opsional, bisa tunggu admin approve)
+      currentUser.balance -= amount;
+      await db.collection("users").doc(currentUser.user).update({
+        balance: currentUser.balance
+      });
+
+      alert("Withdraw berhasil dikirim!");
+      updateUserInfo();
+
+    } catch (err) {
+      console.error(err);
+      alert("Gagal withdraw.");
+    }
   }
-}
-
-function logout() {
-  currentUser = null;
-  alert('Logout berhasil');
-  showPage('home');
-}
-
-function showWithdraw() {
-  if (!currentUser) { alert('Login dulu'); return; }
-  document.getElementById('withdrawRekening').innerText = `Rek: ${currentUser.rekening || '-'} (${currentUser.bank || '-'})`;
-  document.getElementById('withdrawNama').innerText = `User: ${currentUser.user}`;
-  showPage('withdraw');
-}
-
-async function konfirmasiDeposit() {
-  if (!currentUser) { alert('Login dulu'); return; }
-  const amt = parseInt(document.getElementById('depositAmount').value);
-  if (!amt || amt <= 0) { alert('Masukkan nominal'); return; }
-
-  try {
-    await db.collection('deposits').add({
-      user: currentUser.user,
-      amount: amt,
-      status: 'pending',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert(`Deposit Rp ${amt} dicatat. Tunggu approval admin.`);
-    showPage('userarea');
-  } catch (err) {
-    console.error(err);
-    alert('Gagal mencatat deposit');
-  }
-}
-
-async function konfirmasiWithdraw() {
-  if (!currentUser) { alert('Login dulu'); return; }
-  const amt = parseInt(document.getElementById('withdrawAmount').value);
-  if (!amt || amt <= 0) { alert('Masukkan nominal'); return; }
-  if (amt > (currentUser.balance || 0)) { alert('Saldo tidak cukup'); return; }
-
-  try {
-    await db.collection('withdraws').add({
-      user: currentUser.user,
-      amount: amt,
-      status: 'pending',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert(`Withdraw Rp ${amt} dicatat. Tunggu approval admin.`);
-    showPage('userarea');
-  } catch (err) {
-    console.error(err);
-    alert('Gagal mencatat withdraw');
-  }
-}
-
-function showHistory() {
-  if (!currentUser) { alert('Login dulu'); return; }
-  showPage('userarea');
-}
 </script>
-
 </body>
 </html>
