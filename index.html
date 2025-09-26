@@ -337,34 +337,292 @@
     showPage('login');
   });
 
-  // Fungsi login
-  function login() {
-    const userId = document.getElementById('userLogin').value.trim();
-    const password = document.getElementById('passLogin').value;
+   <button onclick="register()">Daftar</button>
+    <br /><br />
+    <button style="background:#ff4444" onclick="showPage('home')">Kembali</button>
+  </div>
+</div>
 
-    if (!userId || !password) {
-      alert('Silakan isi User ID dan Kata Sandi.');
-      return;
-    }
+<!-- User Area -->
+<div id="userarea" class="page">
+  <header>
+    <div class="logo">
+      <img src="jokowitoto.png" alt="jokowitoto Logo">
+    </div>
+    <div class="menu">
+      <a href="#" onclick="showHistory()">History</a>
+      <a href="#" onclick="showPage('deposit')">Deposit</a>
+      <a href="#" onclick="showWithdraw()">Withdraw</a>
+      <a href="#" onclick="alert('Rekening Sudah Terdaftar')">Rekening</a>
+      <a href="#" onclick="alert('Memo belum tersedia')">Memo</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </header>
+  <div class="container">
+    <div class="grid">
+      <div class="card">
+        <h3>User Data</h3>
+        <p id="userData">User: - | Balance: Rp 0</p>
+        <p id="bankData"></p>
+        <p id="phoneData"></p>
+      </div>
+      <div class="card">
+        <h3>Last Bet/Win Report</h3>
+        <p id="betReport">No Data</p>
+      </div>
+      <div class="card">
+        <h3>Last Deposit/Withdraw Status</h3>
+        <div id="historyList" style="max-height:200px; overflow-y:auto;"></div>
+      </div>
+    </div>
 
-    const userDataJSON = localStorage.getItem('user_' + userId);
-    if (!userDataJSON) {
-      alert('User ID tidak ditemukan.');
-      return;
-    }
+    <div class="provider-boxes">
+      <div class="provider-card">Pragmatic</div>
+      <div class="provider-card">PG Soft</div>
+      <div class="provider-card">No Limit</div>
+      <div class="provider-card">jili</div>
+    </div>
 
-    const userData = JSON.parse(userDataJSON);
-    if (userData.password === password) {
-      alert('Login berhasil! Selamat datang, ' + userId + '.');
-      // Lanjutkan ke halaman utama atau apa saja
-      // Misal: window.location.href = 'dashboard.html';
-    } else {
-      alert('Kata sandi salah.');
-    }
+    <div class="game-grid" id="gameGrid"></div>
+  </div>
+</div>
+
+<!-- Deposit -->
+<div id="deposit" class="page">
+  <div class="form-box" style="max-width:400px;">
+    <h2>💸 Deposit Saldo</h2>
+    <p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
+    <img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
+    <label for="depositAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Deposit (Rp)</label>
+    <input type="number" id="depositAmount" placeholder="Contoh: 100000" />
+    <button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
+    <br /><br />
+    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
+  </div>
+</div>
+
+<!-- Withdraw -->
+<div id="withdraw" class="page">
+  <div class="form-box" style="max-width:400px;">
+    <h2>💰 Withdraw Saldo</h2>
+    <p>Data Rekening Anda:</p>
+    <p id="withdrawRekening"></p>
+    <p id="withdrawNama"></p>
+    <label for="withdrawAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Withdraw (Rp)</label>
+    <input type="number" id="withdrawAmount" placeholder="Contoh: 50000" />
+    <button onclick="konfirmasiWithdraw()">Konfirmasi Withdraw</button>
+    <br /><br />
+    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
+  </div>
+</div>
+
+<script>
+// --- Game List ---
+const providerGames = {
+  "Pragmatic": [
+    {name:"GATES OF OLYMPUS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus.png"},
+    {name:"GATES OF OLYMPUS SUPER",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus1.png"},
+    {name:"STARLIGHT PRINCESS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/icens1.png"},
+    {name:"STARLIGHT PRINCESS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/inces2.png"},
+    {name:"BUFFALO KING",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/falo1.png"},
+    {name:"POWER OF THOR",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/thor1.png"},
+    {name:"SWEET BONANZA 1000",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/sweet1.png"},
+    {name:"MAHJONG WINS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/wins2.png"}
+  ],
+  "PG Soft": [
+    {name:"MAHJONG WAYS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong1.png"},
+    {name:"MAHJONG WAYS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong2.png"},
+    {name:"WILD BANDITO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bandit1.png"},
+    {name:"MAFIA MAYHEM",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mayhem3.png"},
+    {name:"LUCKY NEKO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/neko2.png"},
+    {name:"WAYS OF THE QILIN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qilin12.png"},
+    {name:"WILD BOUNTY",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bounty.png"},
+    {name:"GALAXY STONE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/galaxy2.png"}
+  ],
+  "No Limit": [
+    {name:"PUNK TOILET",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/punk1.png"},
+    {name:"DEAD WOOD",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/dead.png"},
+    {name:"ROAD RAGE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rage3.png"},
+    {name:"FIRE HOLE 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tnt.png"},
+    {name:"THE CRYPT",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/cry2.png"},
+    {name:"HIGHWAY TO HELL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/hell3.png"},
+    {name:"KILL EM ALL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/kill2.png"},
+    {name:"FLIGHT MODE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/flight.png"}
+  ],
+  "jili": [
+    {name:"PIRATES QUEEN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/pira8.png"},
+    {name:"MEGA ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mega2.png"},
+    {name:"FORTUNE COINS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/co6.png"},
+    {name:"FORTUNE GAMS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tune5.png"},
+    {name:"SUPER ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/ace9.png"},
+    {name:"CRISTAL 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/stal5.png"},
+    {name:"SUPER MAHJONG",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mahj8.png"},
+    {name:"RAPID GEMS 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rapid7.png"}
+  ]
+};
+
+function populateGameGridByProvider(providerName) {
+  const container = document.getElementById('gameGrid');
+  container.innerHTML = '';
+  const gamesToShow = providerGames[providerName] || [];
+  gamesToShow.forEach(game => {
+    const card = document.createElement('div');
+    card.classList.add('game-card');
+    card.title = game.name;
+    card.innerHTML = `<img src="${game.img}" alt="${game.name}" /><div>${game.name}</div>`;
+    card.onclick = () => alert(`Deposit dulu untuk main: ${game.name}`);
+    container.appendChild(card);
+  });
+}
+
+document.querySelectorAll('.provider-card').forEach(el => {
+  const providerName = el.textContent.trim();
+  el.onclick = () => populateGameGridByProvider(providerName);
+});
+
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+}
+
+async function login() {
+  const user = document.getElementById('userLogin').value.trim();
+  const pass = document.getElementById('passLogin').value;
+  if (!user || !pass) { alert('Isi User & Password'); return; }
+
+  try {
+    const docRef = db.collection('users').doc(user);
+    const docSnap = await docRef.get();
+    if (!docSnap.exists) { alert('User tidak ditemukan'); return; }
+    const data = docSnap.data();
+    if (data.password !== pass) { alert('Password salah'); return; }
+    currentUser = { ...data, user };
+
+    db.collection('users').doc(user).onSnapshot(doc => {
+      const data2 = doc.data();
+      if (!data2) return;
+      currentUser = { ...data2, user };
+      document.getElementById('userData').innerText = `User: ${user} | Balance: Rp ${currentUser.balance || 0}`;
+      document.getElementById('bankData').innerText = `Bank: ${data2.namaRekening || '-'} (${data2.bank || '-'})`;
+      document.getElementById('phoneData').innerText = `HP: ${data2.phone || '-'}`;
+
+      const historyDiv = document.getElementById('historyList');
+      historyDiv.innerHTML = '';
+      db.collection('deposits').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap => {
+        snap.forEach(d => {
+          const dd = d.data();
+          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
+          historyDiv.innerHTML += `<div>Deposit Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
+        });
+      });
+      db.collection('withdraws').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap => {
+        snap.forEach(d => {
+          const dd = d.data();
+          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
+          historyDiv.innerHTML += `<div>Withdraw Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
+        });
+      });
+    });
+
+    showPage('userarea');
+  } catch (err) {
+    console.error(err);
+    alert('Gagal login');
+  }
+}
+
+async function register() {
+  const user = document.getElementById('newUser').value.trim();
+  const pass = document.getElementById('newPass').value;
+  const rekening = document.getElementById('rekNum').value.trim();
+  const namaRekening = document.getElementById('rekName').value.trim();
+  const phone = document.getElementById('phoneNum').value.trim();
+  const bank = document.getElementById('bankType').value;
+
+  if (!user || !pass || !rekening || !namaRekening || !phone || !bank) {
+    alert('Isi semua field');
+    return;
   }
 
-  // Mulai dengan menampilkan halaman login
-  showPage('login');
+  try {
+    const docSnap = await db.collection('users').doc(user).get();
+    if (docSnap.exists) { alert('User sudah terdaftar'); return; }
+    await db.collection('users').doc(user).set({
+      password: pass,
+      namaRekening,
+      rekening,
+      bank,
+      phone,
+      balance: 0,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert('Akun berhasil didaftarkan');
+    showPage('home');
+  } catch (err) {
+    console.error(err);
+    alert('Gagal daftar');
+  }
+}
+
+function logout() {
+  currentUser = null;
+  alert('Logout berhasil');
+  showPage('home');
+}
+
+function showWithdraw() {
+  if (!currentUser) { alert('Login dulu'); return; }
+  document.getElementById('withdrawRekening').innerText = `Rek: ${currentUser.rekening || '-'} (${currentUser.bank || '-'})`;
+  document.getElementById('withdrawNama').innerText = `User: ${currentUser.user}`;
+  showPage('withdraw');
+}
+
+async function konfirmasiDeposit() {
+  if (!currentUser) { alert('Login dulu'); return; }
+  const amt = parseInt(document.getElementById('depositAmount').value);
+  if (!amt || amt <= 0) { alert('Masukkan nominal'); return; }
+
+  try {
+    await db.collection('deposits').add({
+      user: currentUser.user,
+      amount: amt,
+      status: 'pending',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert(`Deposit Rp ${amt} dicatat. Tunggu approval admin.`);
+    showPage('userarea');
+  } catch (err) {
+    console.error(err);
+    alert('Gagal mencatat deposit');
+  }
+}
+
+async function konfirmasiWithdraw() {
+  if (!currentUser) { alert('Login dulu'); return; }
+  const amt = parseInt(document.getElementById('withdrawAmount').value);
+  if (!amt || amt <= 0) { alert('Masukkan nominal'); return; }
+  if (amt > (currentUser.balance || 0)) { alert('Saldo tidak cukup'); return; }
+
+  try {
+    await db.collection('withdraws').add({
+      user: currentUser.user,
+      amount: amt,
+      status: 'pending',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert(`Withdraw Rp ${amt} dicatat. Tunggu approval admin.`);
+    showPage('userarea');
+  } catch (err) {
+    console.error(err);
+    alert('Gagal mencatat withdraw');
+  }
+}
+
+function showHistory() {
+  if (!currentUser) { alert('Login dulu'); return; }
+  showPage('userarea');
+}
 </script>
+
 </body>
 </html>
