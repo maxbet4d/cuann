@@ -2,382 +2,244 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>MAXBET4D - Modern UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAXBET4D - Situs Resmi</title>
   <style>
     :root {
-      /* Variabel warna */
       --color-bg: #0f1224;
       --color-primary: #ffcc00;
-      --color-secondary: #2a2a2a;
+      --color-secondary: #1e1e2f;
       --color-accent: #00cc66;
-      --color-text-light: #ffffff;
-      --color-text-muted: #cccccc;
+      --color-text: #ffffff;
+      --color-muted: #aaaaaa;
       --radius: 8px;
-      --transition-speed: 0.3s;
-      --box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      --transition: 0.3s ease;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: var(--color-bg);
-      color: var(--color-text-light);
-      line-height: 1.5;
-      overflow-x: hidden;
+      color: var(--color-text);
+      line-height: 1.6;
     }
 
     header {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: 1rem;
       background: var(--color-secondary);
-      box-shadow: var(--box-shadow);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 999;
     }
 
     .logo img {
-      height: 80px;
+      height: 60px;
       width: auto;
     }
 
     .header-right {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
     }
 
     .login-form {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .login-form input {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem;
       border-radius: var(--radius);
       border: 1px solid #444;
-      background: #1a1a1a;
-      color: var(--color-text-light);
-      transition: border 0.2s;
-    }
-
-    .login-form input:focus {
-      outline: none;
-      border-color: var(--color-primary);
+      background: #111;
+      color: var(--color-text);
+      flex: 1 1 120px;
     }
 
     .login-form button {
-      padding: 0.5rem 1.25rem;
+      padding: 0.5rem 1rem;
+      background: var(--color-primary);
+      color: #000;
       border: none;
       border-radius: var(--radius);
-      background: var(--color-primary);
-      color: var(--color-bg);
-      font-weight: bold;
       cursor: pointer;
-      transition: transform var(--transition-speed), background var(--transition-speed);
+      transition: background var(--transition);
     }
 
     .login-form button:hover {
       background: var(--color-accent);
-      transform: scale(1.05);
     }
 
     .btn-wa {
+      background: #25D366;
+      color: white;
       padding: 0.5rem 1rem;
       border-radius: var(--radius);
-      background: #25D366;
-      color: var(--color-text-light);
       text-decoration: none;
-      transition: background var(--transition-speed), transform var(--transition-speed);
+      font-weight: bold;
+      transition: background var(--transition);
     }
 
     .btn-wa:hover {
       background: #1ebe5d;
-      transform: scale(1.05);
     }
 
     .banner {
-      text-align: center;
-      padding: 3rem 1rem;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: var(--color-primary);
+      text-align: center;
+      padding: 2rem 1rem;
+      margin: 1rem auto;
       border-radius: var(--radius);
-      margin: 2rem auto;
-      max-width: 90%;
-      box-shadow: var(--box-shadow);
+      max-width: 100%;
+      color: var(--color-primary);
+      box-shadow: var(--shadow);
     }
 
     .banner h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     .banner p {
-      font-size: 1.2rem;
-      color: var(--color-text-muted);
+      color: var(--color-muted);
+      font-size: 1rem;
     }
 
     .btn-main {
-      margin-top: 1.5rem;
-      padding: 0.75rem 2rem;
-      font-size: 1.1rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--color-primary);
+      color: #000;
       border: none;
       border-radius: var(--radius);
-      background: var(--color-primary);
-      color: var(--color-bg);
+      font-weight: bold;
+      transition: background var(--transition);
       cursor: pointer;
-      transition: background var(--transition-speed), transform var(--transition-speed);
     }
 
     .btn-main:hover {
       background: var(--color-accent);
-      transform: scale(1.05);
     }
 
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     .game-card {
       background: #1f1f1f;
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
+      transition: transform var(--transition);
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px) scale(1.03);
     }
 
     .game-card img {
       width: 100%;
       height: auto;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
+      display: block;
     }
 
     .game-card div {
-      padding: 0.75rem 0.5rem;
-      color: var(--color-text-light);
+      padding: 0.5rem;
       font-weight: bold;
     }
 
-    .game-card:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-    }
-
+    /* Mobile Optimization */
     @media (max-width: 768px) {
-      .banner h1 {
-        font-size: 2rem;
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
       }
+
+      .header-right {
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .login-form {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .login-form input,
+      .login-form button {
+        width: 100%;
+      }
+
+      .btn-wa {
+        width: 100%;
+        text-align: center;
+      }
+
+      .banner h1 {
+        font-size: 1.5rem;
+      }
+
       .banner p {
-        font-size: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .game-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
-      <img src="maxbet.png" alt="MAXBET Logo" />
+      <img src="maxbet.png" alt="MAXBET Logo">
     </div>
     <div class="header-right">
       <form class="login-form">
         <input type="text" id="userLogin" placeholder="User ID" />
         <input type="password" id="passLogin" placeholder="Kata Sandi" />
-        <button type="button" class="btn-login" onclick="login()">Login</button>
-        <button type="button" class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+        <button type="button" onclick="login()">Login</button>
+        <button type="button" onclick="showPage('daftar')">Daftar</button>
       </form>
-      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
-        💬 Live Chat
-      </a>
+      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
     </div>
   </header>
 
   <div class="banner">
-    <h1>🎉 Welcome to MAXBET4D 🎉</h1>
-    <p>Situs terbaik di Asia — Aman & 100% Resmi</p>
+    <h1>🎉 Selamat Datang di MAXBET4D 🎉</h1>
+    <p>Situs Resmi Aman dan Terpercaya. Daftar Sekarang & Menang!</p>
     <button class="btn-main">Main Sekarang</button>
   </div>
 
   <div class="game-grid">
     <div class="game-card">
-      <img src="path/to/game1.jpg" alt="Game 1" />
+      <img src="path/to/game1.jpg" alt="Game 1">
       <div>Game 1</div>
     </div>
     <div class="game-card">
-      <img src="path/to/game2.jpg" alt="Game 2" />
+      <img src="path/to/game2.jpg" alt="Game 2">
       <div>Game 2</div>
     </div>
-    <!-- game-card lainnya -->
+    <!-- Tambahkan lebih banyak game-card sesuai kebutuhan -->
   </div>
-
-
-  <!-- FORM DAFTAR -->
-  <div id="daftar" class="page" style="display:none;">
-    <section style="padding: 20px;">
-      <h2>Form Pendaftaran</h2>
-      <form id="registerForm" onsubmit="event.preventDefault(); register();">
-        <input type="text" id="regUser" placeholder="User ID" required />
-        <input type="password" id="regPass" placeholder="Kata Sandi" required />
-        <input type="text" id="regRef" placeholder="Kode Referal (opsional)" />
-        <button type="submit" class="btn-daftar">Daftar Sekarang</button>
-        <button type="button" onclick="showPage('home')">Kembali</button>
-      </form>
-    </section>
-  </div>
-
-  <!-- USER AREA -->
-  <div id="userPage" class="page" style="display:none;">
-    <section style="padding: 20px;">
-      <h2>Selamat Datang, <span id="usernameDisplay"></span></h2>
-      <p>Saldo Anda: <span id="saldoDisplay">0</span></p>
-      <button onclick="showPage('deposit')">Deposit</button>
-      <button onclick="showPage('withdraw')">Withdraw</button>
-      <button onclick="logout()">Logout</button>
-    </section>
-  </div>
-  <!-- DEPOSIT -->
-  <div id="deposit" class="page" style="display:none;">
-    <section style="padding: 20px;">
-      <h2>Deposit</h2>
-      <p>Silakan transfer ke rekening kami:</p>
-      <p><strong>BCA: 1234567890 a.n. MAXBET4D</strong></p>
-      <input type="number" id="depositAmount" placeholder="Jumlah Deposit" required />
-      <button onclick="deposit()">Kirim</button>
-      <button onclick="showPage('userPage')">Kembali</button>
-    </section>
-  </div>
-
-  <!-- WITHDRAW -->
-  <div id="withdraw" class="page" style="display:none;">
-    <section style="padding: 20px;">
-      <h2>Withdraw</h2>
-      <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" required />
-      <button onclick="withdraw()">Kirim</button>
-      <button onclick="showPage('userPage')">Kembali</button>
-    </section>
-  </div>
-
-  <!-- FIREBASE SCRIPT -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
-  <script>
-    // Firebase Config
-    const firebaseConfig = {
-      apiKey: "AIzaSyBC8UXFcrJaxMsJsTQgnqaaNvgsAVz0vOE",
-      authDomain: "ariptoto-web.firebaseapp.com",
-      projectId: "ariptoto-web",
-      storageBucket: "ariptoto-web.appspot.com",
-      messagingSenderId: "129200594109",
-      appId: "1:129200594109:web:50f7f4ce89a384211b2bd4"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    let currentUser = null;
-
-    // Page Switching
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-
-    // Login
-    async function login() {
-      const username = document.getElementById('loginUser').value.trim();
-      const password = document.getElementById('loginPass').value.trim();
-      if (!username || !password) return alert("Isi semua field");
-
-      const userRef = db.collection('users').doc(username);
-      const doc = await userRef.get();
-      if (!doc.exists || doc.data().password !== password) {
-        return alert("Login gagal");
-      }
-
-      currentUser = { username, ...doc.data() };
-      document.getElementById('usernameDisplay').innerText = username;
-      document.getElementById('saldoDisplay').innerText = currentUser.balance || 0;
-      showPage('userPage');
-    }
-
-    // Register
-    async function register() {
-      const username = document.getElementById('regUser').value.trim();
-      const password = document.getElementById('regPass').value.trim();
-      const referal = document.getElementById('regRef').value.trim();
-      if (!username || !password) return alert("Isi semua field");
-
-      const doc = await db.collection('users').doc(username).get();
-      if (doc.exists) return alert("User sudah terdaftar");
-
-      await db.collection('users').doc(username).set({
-        password,
-        balance: 0,
-        referal,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      alert("Registrasi berhasil!");
-      showPage('home');
-    }
-
-    // Logout
-    function logout() {
-      currentUser = null;
-      alert("Logout berhasil");
-      showPage('home');
-    }
-
-    // Deposit
-    async function deposit() {
-      if (!currentUser) return alert("Login dulu");
-      const amount = parseInt(document.getElementById('depositAmount').value);
-      if (!amount || amount <= 0) return alert("Nominal tidak valid");
-
-      await db.collection('deposits').add({
-        user: currentUser.username,
-        amount,
-        status: 'pending',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      alert("Deposit dikirim. Tunggu konfirmasi admin.");
-      showPage('userPage');
-    }
-
-    // Withdraw
-    async function withdraw() {
-      if (!currentUser) return alert("Login dulu");
-      const amount = parseInt(document.getElementById('withdrawAmount').value);
-      if (!amount || amount <= 0) return alert("Nominal tidak valid");
-      if (amount > (currentUser.balance || 0)) return alert("Saldo tidak cukup");
-
-      await db.collection('withdraws').add({
-        user: currentUser.username,
-        amount,
-        status: 'pending',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      alert("Withdraw dikirim. Tunggu konfirmasi admin.");
-      showPage('userPage');
-    }
-  </script>
 </body>
 </html>
-
