@@ -368,3 +368,69 @@
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard MAXBET4D</title>
+  <style>
+    body {
+      background-color: #0f1224;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #1e1e2f;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    button {
+      background: #ffcc00;
+      border: none;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #00cc66;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Datang di Dashboard</h1>
+    <p id="welcomeMsg"></p>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    // Cek user login
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+      // Kalau belum login, kembali ke halaman login
+      window.location.href = 'index.html'; // ganti sesuai nama file login kamu
+    } else {
+      // Tampilkan pesan selamat datang dengan userId
+      document.getElementById('welcomeMsg').innerText = 'Halo, ' + loggedInUser + '! Kamu sudah login.';
+    }
+
+    // Fungsi logout
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      localStorage.removeItem('loggedInUser');
+      alert('Logout berhasil!');
+      window.location.href = 'index.html'; // ganti sesuai nama file login kamu
+    });
+  </script>
+</body>
+</html>
