@@ -24,44 +24,28 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-    }
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e3f;
+  color: #eee;
+}
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: var(--color-secondary);
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
+.container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2a2a40;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
 
-    .logo img {
-      height: 60px;
-      width: auto;
-    }
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 150px;
+}
 
-    .header-right {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-end;
-    }
-
-    .login-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .login-form input {
+.login-form input {
   width: 100%;
   height: 32px; /* Tinggi input dikurangi */
   padding: 6px 10px; /* Padding dikurangi */
@@ -75,148 +59,71 @@
   transition: border-color 0.3s ease;
 }
 
-    .login-form button {
-      padding: 0.5rem 1rem;
-      background: var(--color-primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-
-    .login-form button:hover {
-      background: var(--color-accent);
-    }
-
-    .btn-wa {
-      background: #25D366;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: bold;
-      transition: background var(--transition);
-    }
-
-    .btn-wa:hover {
-      background: #1ebe5d;
-    }
-
-    .banner {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      text-align: center;
-      padding: 2rem 1rem;
-      margin: 1rem auto;
-      border-radius: var(--radius);
-      max-width: 100%;
-      color: var(--color-primary);
-      box-shadow: var(--shadow);
-    }
-
-    .banner h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .banner p {
-      color: var(--color-muted);
-      font-size: 1rem;
-    }
-
-    .btn-main {
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--color-primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: bold;
-      transition: background var(--transition);
-      cursor: pointer;
-    }
-
-    .btn-main:hover {
-      background: var(--color-accent);
-    }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .game-card {
-      background: #1f1f1f;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      text-align: center;
-      transition: transform var(--transition);
-    }
-
-    .game-card:hover {
-      transform: translateY(-4px) scale(1.03);
-    }
-
-    .game-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .game-card div {
-      padding: 0.5rem;
-      font-weight: bold;
-    }
-
-    /* Mobile Optimization */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .header-right {
-        align-items: flex-start;
-        width: 100%;
-      }
-
-      .login-form {
-        width: 100%;
-        flex-direction: column;
-      }
-
-      .login-form input {
-  padding: 0.35rem 0.5rem;
-  border-radius: var(--radius);
-  border: 1px solid #444;
-  background: #111;
-  color: var(--color-text);
-  flex: 1 1 120px;
-  font-size: 0.9rem;
+.login-form input::placeholder {
+  color: #777;
 }
 
+.login-form input:focus {
+  border-color: #f6c90e;
+  outline: none;
+}
 
-      .btn-wa {
-        width: 100%;
-        text-align: center;
-      }
+.button {
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
 
-      .banner h1 {
-        font-size: 1.5rem;
-      }
+.btn-login {
+  background-color: #f6c90e;
+  color: #000;
+}
 
-      .banner p {
-        font-size: 0.95rem;
-      }
+.btn-login:hover {
+  background-color: #ddb800;
+}
 
-      .game-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+.btn-register {
+  background-color: #f6c90e;
+  color: #000;
+}
+
+.btn-register:hover {
+  background-color: #ddb800;
+}
+
+.btn-livechat {
+  background-color: #3ac47d;
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-livechat:hover {
+  background-color: #339a6a;
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .login-form input {
+    height: 30px; /* Lebih kecil untuk layar kecil */
+    font-size: 13px;
+  }
+
+  .button {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}
   </style>
 </head>
 <body>
