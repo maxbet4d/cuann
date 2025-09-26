@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Konfigurasi Firebase (ganti dengan punyamu)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMlcSNmPU924iGdXORaX1PBq6sTXiaw-o",
+    authDomain: "ariptoto-firebase.firebaseapp.com",
+    projectId: "ariptoto-firebase",
+    storageBucket: "ariptoto-firebase.firebasestorage.app",
+    messagingSenderId: "200968229021",
+    appId: "1:200968229021:web:b4717f29db3ceba8ecc474"
+  };
+
+  // Init Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAXBET4D - Full Web Firebase</title>
@@ -299,69 +320,57 @@
   }
 
   // Fungsi daftar
-  document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const userId = document.getElementById('regUserId').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value;
-    const confirmPassword = document.getElementById('regConfirmPassword').value;
-    const namaRekening = document.getElementById('regNamaRekening').value.trim();
-    const nomorRekening = document.getElementById('regNomorRekening').value.trim();
-    const noHP = document.getElementById('regNoHP').value.trim();
-    const bankEwallet = document.getElementById('regBankEwallet').value;
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-    if(password !== confirmPassword) {
-      alert('Kata sandi dan konfirmasi kata sandi tidak cocok!');
-      return;
-    }
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+  const userId = document.getElementById('regUserId').value.trim();
 
-    // Cek apakah userId sudah ada
-    if(localStorage.getItem('user_' + userId)) {
-      alert('User ID sudah digunakan, silakan pilih yang lain.');
-      return;
-    }
+  if(password !== confirmPassword){
+    alert("Kata sandi tidak cocok!");
+    return;
+  }
 
-    // Simpan data user ke localStorage (JSON string)
-    const userData = {
+  try {
+    // Buat akun di Firebase Auth
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const user = userCredential.user;
+
+    // Simpan data tambahan di Firestore
+    await db.collection("users").doc(user.uid).set({
       userId,
       email,
-      password,
-      namaRekening,
-      nomorRekening,
-      noHP,
-      bankEwallet
-    };
+      namaRekening: document.getElementById('regNamaRekening').value.trim(),
+      nomorRekening: document.getElementById('regNomorRekening').value.trim(),
+      noHP: document.getElementById('regNoHP').value.trim(),
+      bankEwallet: document.getElementById('regBankEwallet').value,
+      createdAt: new Date()
+    });
 
-    localStorage.setItem('user_' + userId, JSON.stringify(userData));
-    alert('Pendaftaran berhasil! Silakan login.');
-    showPage('login');
-  });
+    alert("Pendaftaran berhasil! Silakan login.");
+    showPage("login");
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
+});
 
   // Fungsi login
-  function login() {
-    const userId = document.getElementById('userLogin').value.trim();
-    const password = document.getElementById('passLogin').value;
+  async function login() {
+  const email = document.getElementById('userLogin').value.trim();
+  const password = document.getElementById('passLogin').value;
 
-    if (!userId || !password) {
-      alert('Silakan isi User ID dan Kata Sandi.');
-      return;
-    }
+  try {
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    const user = userCredential.user;
 
-    const userDataJSON = localStorage.getItem('user_' + userId);
-    if (!userDataJSON) {
-      alert('User ID tidak ditemukan.');
-      return;
-    }
-
-    const userData = JSON.parse(userDataJSON);
-    if (userData.password === password) {
-      alert('Login berhasil! Selamat datang, ' + userId + '.');
-      // Lanjutkan ke halaman utama atau apa saja
-      // Misal: window.location.href = 'dashboard.html';
-    } else {
-      alert('Kata sandi salah.');
-    }
+    alert("Login berhasil, selamat datang!");
+    window.location.href = "dashboard.html"; // arahkan ke user area
+  } catch (error) {
+    alert("Login gagal: " + error.message);
   }
+}
 
   // Mulai dengan menampilkan halaman login
   showPage('login');
