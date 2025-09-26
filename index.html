@@ -63,10 +63,9 @@
 
     .login-form input {
   width: 100%;
-  height: 32px; /* Tinggi input dikurangi */
-  padding: 6px 10px; /* Padding dikurangi */
-  margin-bottom: 15px;
-  font-size: 14px; /* Ukuran font disesuaikan */
+  height: auto;          /* otomatis sesuai isi teks */
+  padding: 8px 12px;     /* padding cukup untuk teks nyaman */
+  font-size: 14px;
   color: #eee;
   background-color: #121224;
   border: 1px solid #444;
@@ -190,13 +189,16 @@
       }
 
       .login-form input {
-  padding: 0.35rem 0.5rem;
-  border-radius: var(--radius);
+  width: 100%;
+  height: auto;          /* otomatis sesuai isi teks */
+  padding: 8px 12px;     /* padding cukup untuk teks nyaman */
+  font-size: 14px;
+  color: #eee;
+  background-color: #121224;
   border: 1px solid #444;
-  background: #111;
-  color: var(--color-text);
-  flex: 1 1 120px;
-  font-size: 0.9rem;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
 
