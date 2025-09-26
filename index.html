@@ -269,5 +269,34 @@
     </div>
     <!-- Tambahkan lebih banyak game-card sesuai kebutuhan -->
   </div>
+  <script>
+  function showPage(page) {
+    const loginForm = document.querySelector('.login-form');
+    const registerPage = document.getElementById('registerPage');
+
+    if (page === 'daftar') {
+      loginForm.style.display = 'none';
+      registerPage.style.display = 'block';
+    } else if (page === 'login') {
+      loginForm.style.display = 'flex';
+      registerPage.style.display = 'none';
+    }
+  }
+
+  // Contoh validasi sederhana form daftar
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pw = document.getElementById('regPassword').value;
+    const cpw = document.getElementById('regConfirmPassword').value;
+
+    if (pw !== cpw) {
+      alert('Kata sandi dan konfirmasi kata sandi tidak cocok!');
+      return;
+    }
+    alert('Registrasi berhasil untuk User ID: ' + document.getElementById('regUserId').value);
+    // Setelah registrasi bisa otomatis balik ke login
+    showPage('login');
+  });
+</script>
 </body>
 </html>
