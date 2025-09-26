@@ -31,27 +31,27 @@
       background: #0a0f1c;
       color: white;
       overflow-x: hidden;
+      touch-action: manipulation;
+      -ms-touch-action: manipulation;
     }
 
     header {
       background: #111a33;
       padding: 10px 20px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       flex-wrap: wrap;
-      gap: 20px;
     }
 
     .logo {
       display: flex;
       align-items: center;
       flex-shrink: 0;
-      margin-right: 20px;
     }
 
     .logo img {
@@ -80,6 +80,9 @@
       border-radius: 5px;
       border: none;
       outline: none;
+      min-width: 100px;
+      max-width: 150px;
+      flex: 1 1 auto;
     }
 
     .login-form button {
@@ -89,6 +92,8 @@
       cursor: pointer;
       font-weight: bold;
       transition: all 0.3s ease;
+      max-width: 120px;
+      flex: 1 1 auto;
     }
 
     .btn-login {
@@ -99,11 +104,6 @@
     .btn-daftar {
       background: #00cc66;
       color: white;
-    }
-
-    .login-form button:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
     }
 
     .btn-wa {
@@ -124,12 +124,10 @@
       transform: scale(1.05);
     }
 
-    /* Responsive - Mobile */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
       }
 
       .header-right {
@@ -158,343 +156,186 @@
         height: 80px;
       }
     }
+
+    /* Tambahan animasi & style lainnya tetap ada nanti */
   </style>
 </head>
+
 <body>
-
-<!-- Home -->
-<div id="home" class="page active">
-<header>
-<div class="logo">
-   <img src="maxbet.png" alt="MAXBET Logo" />
-</div>
-<div class="login-form">
-<input type="text" id="userLogin" placeholder="User ID" />
-<input type="password" id="passLogin" placeholder="Kata Sandi" />
-<button class="btn-login" onclick="login()">Login</button>
-<button class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
-</div>
-<div style="width:100%; text-align:right;">
-<a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Hubungi WhatsApp / Live Chat</a>
-</div>
-</header>
-<div class="banner">
-<h1>🎉 WELCOME TO MAXBET4D 🎉</h1>
-<p class="small">Situs terbaik di Asia • Aman & 100% Resmi</p>
-<button class="btn-main" onclick="alert('Fitur Main Sekarang belum aktif')">Main Sekarang</button>
-<img src="https://raw.githubusercontent.com/reyreygits/ariptoto11/8c6b6bc656f69037edc448d4997d0d9d784e8711/poto.png2" alt="Banner Image" class="center-image" />
-</div>
-</div>
-
-<!-- Daftar -->
-<div id="daftar" class="page">
-<div class="form-box">
-<h2>Form Pendaftaran</h2>
-<input type="text" id="newUser" placeholder="User ID" />
-<input type="password" id="newPass" placeholder="Kata Sandi" />
-<input type="text" id="rekNum" placeholder="No. Rekening" />
-<input type="text" id="rekName" placeholder="Nama Rekening" />
-<input type="text" id="phoneNum" placeholder="No. HP" />
-<select id="bankType">
-<option value="">-- Pilih Bank / E-Wallet --</option>
-<option>Bank BCA</option>
-<option>Bank BNI</option>
-<option>Bank BRI</option>
-<option>Bank Mandiri</option>
-<option>DANA</option>
-<option>OVO</option>
-<option>Gopay</option>
-<option>ShopeePay</option>
-</select>
-<button onclick="register()">Daftar</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('home')">Kembali</button>
-</div>
-</div>
-
-<!-- User Area -->
-<div id="userarea" class="page">
-  
-<header>
-  <div class="logo">
-    <img src="maxbet.png" alt="MAXBET Logo" />
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <header>
+      <div class="logo">
+        <img src="maxbet.png" alt="MAXBET Logo" />
+      </div>
+      <div class="header-right">
+        <form class="login-form">
+          <input type="text" id="userLogin" placeholder="User ID" />
+          <input type="password" id="passLogin" placeholder="Kata Sandi" />
+          <button type="button" class="btn-login" onclick="login()">Login</button>
+          <button type="button" class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+        </form>
+        <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
+          💬 Hubungi WhatsApp / Live Chat
+        </a>
+      </div>
+    </header>
+    <!-- Banner -->
+    <section style="padding: 20px; text-align: center;">
+      <h1>Selamat Datang di MAXBET4D</h1>
+      <p>Website togel terpercaya dan terbaik di Indonesia.</p>
+      <img src="banner.jpg" alt="Promo Banner" style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.4);" />
+    </section>
   </div>
 
-  <div class="header-right">
-    <div class="login-form">
-      <input type="text" id="userLogin" placeholder="User ID" />
-      <input type="password" id="passLogin" placeholder="Kata Sandi" />
-      <button class="btn-login" onclick="login()">Login</button>
-      <button class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
-    </div>
-    <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
-      💬 Hubungi WhatsApp / Live Chat
-    </a>
+  <!-- FORM DAFTAR -->
+  <div id="daftar" class="page" style="display:none;">
+    <section style="padding: 20px;">
+      <h2>Form Pendaftaran</h2>
+      <form id="registerForm" onsubmit="event.preventDefault(); register();">
+        <input type="text" id="regUser" placeholder="User ID" required />
+        <input type="password" id="regPass" placeholder="Kata Sandi" required />
+        <input type="text" id="regRef" placeholder="Kode Referal (opsional)" />
+        <button type="submit" class="btn-daftar">Daftar Sekarang</button>
+        <button type="button" onclick="showPage('home')">Kembali</button>
+      </form>
+    </section>
   </div>
-</header>
-<div class="container">
-<div class="grid">
-<div class="card">
-<h3>User Data</h3>
-<p id="userData">User: - | Balance: Rp 0</p>
-<p id="bankData"></p>
-<p id="phoneData"></p>
-</div>
-<div class="card">
-<h3>Last Bet/Win Report</h3>
-<p id="betReport">No Data</p>
-</div>
-<div class="card">
-<h3>Last Deposit/Withdraw Status</h3>
-<div id="historyList" style="max-height:200px; overflow-y:auto;"></div>
-</div>
-</div>
 
-<div class="provider-boxes">
-<div class="provider-card">Pragmatic</div>
-<div class="provider-card">PG Soft</div>
-<div class="provider-card">No Limit</div>
-<div class="provider-card">jili</div>
-</div>
+  <!-- USER AREA -->
+  <div id="userPage" class="page" style="display:none;">
+    <section style="padding: 20px;">
+      <h2>Selamat Datang, <span id="usernameDisplay"></span></h2>
+      <p>Saldo Anda: <span id="saldoDisplay">0</span></p>
+      <button onclick="showPage('deposit')">Deposit</button>
+      <button onclick="showPage('withdraw')">Withdraw</button>
+      <button onclick="logout()">Logout</button>
+    </section>
+  </div>
+  <!-- DEPOSIT -->
+  <div id="deposit" class="page" style="display:none;">
+    <section style="padding: 20px;">
+      <h2>Deposit</h2>
+      <p>Silakan transfer ke rekening kami:</p>
+      <p><strong>BCA: 1234567890 a.n. MAXBET4D</strong></p>
+      <input type="number" id="depositAmount" placeholder="Jumlah Deposit" required />
+      <button onclick="deposit()">Kirim</button>
+      <button onclick="showPage('userPage')">Kembali</button>
+    </section>
+  </div>
 
-<div class="game-grid" id="gameGrid"></div>
-</div>
-</div>
+  <!-- WITHDRAW -->
+  <div id="withdraw" class="page" style="display:none;">
+    <section style="padding: 20px;">
+      <h2>Withdraw</h2>
+      <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" required />
+      <button onclick="withdraw()">Kirim</button>
+      <button onclick="showPage('userPage')">Kembali</button>
+    </section>
+  </div>
 
-<!-- Deposit -->
-<div id="deposit" class="page">
-<div class="form-box" style="max-width:400px;">
-<h2>💸 Deposit Saldo</h2>
-<p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
-<img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
-<label for="depositAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Deposit (Rp)</label>
-<input type="number" id="depositAmount" placeholder="Contoh: 100000" />
-<button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
-</div>
-</div>
+  <!-- FIREBASE SCRIPT -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-<!-- Withdraw -->
-<div id="withdraw" class="page">
-<div class="form-box" style="max-width:400px;">
-<h2>💰 Withdraw Saldo</h2>
-<p>Data Rekening Anda:</p>
-<p id="withdrawRekening"></p>
-<p id="withdrawNama"></p>
-<label for="withdrawAmount" style="display:block;text-align:left;margin-top:8px;">Nominal Withdraw (Rp)</label>
-<input type="number" id="withdrawAmount" placeholder="Contoh: 50000" />
-<button onclick="konfirmasiWithdraw()">Konfirmasi Withdraw</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
-</div>
-</div>
+  <script>
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBC8UXFcrJaxMsJsTQgnqaaNvgsAVz0vOE",
+      authDomain: "ariptoto-web.firebaseapp.com",
+      projectId: "ariptoto-web",
+      storageBucket: "ariptoto-web.appspot.com",
+      messagingSenderId: "129200594109",
+      appId: "1:129200594109:web:50f7f4ce89a384211b2bd4"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    let currentUser = null;
 
-<script>
-// --- Game List ---
-const providerGames = {
-"Pragmatic":[
-{name:"GATES OF OLYMPUS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus.png"},
-{name:"GATES OF OLYMPUS SUPER",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/zeus1.png"},
-{name:"STARLIGHT PRINCESS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/icens1.png"},
-{name:"STARLIGHT PRINCESS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/inces2.png"},
-{name:"BUFFALO KING",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/falo1.png"},
-{name:"POWER OF THOR",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/thor1.png"},
-{name:"SWEET BONANZA 1000",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/sweet1.png"},
-{name:"MAHJONG WINS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/wins2.png"}
-],
-"PG Soft":[
-{name:"MAHJONG WAYS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong1.png"},
-{name:"MAHJONG WAYS 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/jong2.png"},
-{name:"WILD BANDITO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bandit1.png"},
-{name:"MAFIA MAYHEM",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mayhem3.png"},
-{name:"LUCKY NEKO",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/neko2.png"},
-{name:"WAYS OF THE QILIN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qilin12.png"},
-{name:"WILD BOUNTY",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/bounty.png"},
-{name:"GALAXY STONE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/galaxy2.png"}
-],
-"No Limit":[
-{name:"PUNK TOILET",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/punk1.png"},
-{name:"DEAD WOOD",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/dead.png"},
-{name:"ROAD RAGE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rage3.png"},
-{name:"FIRE HOLE 2",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tnt.png"},
-{name:"THE CRYPT",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/cry2.png"},
-{name:"HIGHWAY TO HELL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/hell3.png"},
-{name:"KILL EM ALL",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/kill2.png"},
-{name:"FLIGHT MODE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/flight.png"}
-],
-"jili":[
-{name:"PIRATES QUEEN",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/pira8.png"},
-{name:"MEGA ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mega2.png"},
-{name:"FORTUNE COINS",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/co6.png"},
-{name:"FORTUNE GAMS 3",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/tune5.png"},
-{name:"SUPER ACE",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/ace9.png"},
-{name:"CRISTAL 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/stal5.png"},
-{name:"SUPER MAHJONG",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/mahj8.png"},
-{name:"RAPID GEMS 777",img:"https://raw.githubusercontent.com/reyreygits/ariptoto11/main/rapid7.png"}
-]
-};
+    // Page Switching
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
 
-// Populate Game Grid
-function populateGameGridByProvider(providerName){
-  const container = document.getElementById('gameGrid');
-  container.innerHTML = '';
-  const gamesToShow = providerGames[providerName] || [];
-  gamesToShow.forEach(game=>{
-    const card = document.createElement('div');
-    card.classList.add('game-card');
-    card.title = game.name;
-    card.innerHTML = `<img src="${game.img}" alt="${game.name}" /><div>${game.name}</div>`;
-    card.onclick = () => alert(`Deposit dulu untuk main: ${game.name}`);
-    container.appendChild(card);
-  });
-}
+    // Login
+    async function login() {
+      const username = document.getElementById('loginUser').value.trim();
+      const password = document.getElementById('loginPass').value.trim();
+      if (!username || !password) return alert("Isi semua field");
 
-// Provider Click Event
-document.querySelectorAll('.provider-card').forEach((el)=>{
-  const providerName = el.textContent.trim();
-  el.onclick = ()=>populateGameGridByProvider(providerName);
-});
+      const userRef = db.collection('users').doc(username);
+      const doc = await userRef.get();
+      if (!doc.exists || doc.data().password !== password) {
+        return alert("Login gagal");
+      }
 
-// Navigation
-function showPage(pageId){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-}
+      currentUser = { username, ...doc.data() };
+      document.getElementById('usernameDisplay').innerText = username;
+      document.getElementById('saldoDisplay').innerText = currentUser.balance || 0;
+      showPage('userPage');
+    }
 
-// Login (manual via Firestore users collection)
-async function login(){
-  const user = document.getElementById('userLogin').value.trim();
-  const pass = document.getElementById('passLogin').value;
-  if(!user || !pass){ alert('Isi User & Password'); return; }
+    // Register
+    async function register() {
+      const username = document.getElementById('regUser').value.trim();
+      const password = document.getElementById('regPass').value.trim();
+      const referal = document.getElementById('regRef').value.trim();
+      if (!username || !password) return alert("Isi semua field");
 
-  try{
-    const docRef = db.collection('users').doc(user);
-    const docSnap = await docRef.get();
-    if(!docSnap.exists){ alert('User tidak ditemukan'); return; }
-    const data = docSnap.data();
-    if(data.password !== pass){ alert('Password salah'); return; }
-    currentUser = {...data, user};
+      const doc = await db.collection('users').doc(username).get();
+      if (doc.exists) return alert("User sudah terdaftar");
 
-    // realtime update user doc
-    db.collection('users').doc(user).onSnapshot(doc=>{
-      const data = doc.data();
-      if(!data) return;
-      currentUser = {...data, user};
-      document.getElementById('userData').innerText = `User: ${user} | Balance: Rp ${currentUser.balance || 0}`;
-      document.getElementById('bankData').innerText = `Bank: ${data.namaRekening || '-'} (${data.bank || '-'})`;
-      document.getElementById('phoneData').innerText = `HP: ${data.phone || '-'}`;
-
-      // update history (deposits & withdraws)
-      const historyDiv = document.getElementById('historyList');
-      historyDiv.innerHTML = '';
-      db.collection('deposits').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap=>{
-        snap.forEach(d=>{
-          const dd = d.data();
-          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
-          historyDiv.innerHTML += `<div>Deposit Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
-        });
+      await db.collection('users').doc(username).set({
+        password,
+        balance: 0,
+        referal,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      db.collection('withdraws').where('user','==',user).orderBy('createdAt','desc').limit(10).get().then(snap=>{
-        snap.forEach(d=>{
-          const dd = d.data();
-          const dateStr = dd.createdAt && dd.createdAt.toDate ? dd.createdAt.toDate().toLocaleString() : (dd.createdAt || '');
-          historyDiv.innerHTML += `<div>Withdraw Rp ${dd.amount} - ${dd.status} - ${dateStr}</div>`;
-        });
+      alert("Registrasi berhasil!");
+      showPage('home');
+    }
+
+    // Logout
+    function logout() {
+      currentUser = null;
+      alert("Logout berhasil");
+      showPage('home');
+    }
+
+    // Deposit
+    async function deposit() {
+      if (!currentUser) return alert("Login dulu");
+      const amount = parseInt(document.getElementById('depositAmount').value);
+      if (!amount || amount <= 0) return alert("Nominal tidak valid");
+
+      await db.collection('deposits').add({
+        user: currentUser.username,
+        amount,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-    });
+      alert("Deposit dikirim. Tunggu konfirmasi admin.");
+      showPage('userPage');
+    }
 
-    showPage('userarea');
+    // Withdraw
+    async function withdraw() {
+      if (!currentUser) return alert("Login dulu");
+      const amount = parseInt(document.getElementById('withdrawAmount').value);
+      if (!amount || amount <= 0) return alert("Nominal tidak valid");
+      if (amount > (currentUser.balance || 0)) return alert("Saldo tidak cukup");
 
-  }catch(err){ console.error(err); alert('Gagal login'); }
-}
-
-// Register
-async function register(){
-  const user = document.getElementById('newUser').value.trim();
-  const pass = document.getElementById('newPass').value;
-  const rekening = document.getElementById('rekNum').value.trim();
-  const namaRekening = document.getElementById('rekName').value.trim();
-  const phone = document.getElementById('phoneNum').value.trim();
-  const bank = document.getElementById('bankType').value;
-
-  if(!user || !pass || !rekening || !namaRekening || !phone || !bank){ alert('Isi semua field'); return; }
-
-  try{
-    const docSnap = await db.collection('users').doc(user).get();
-    if(docSnap.exists){ alert('User sudah terdaftar'); return; }
-    await db.collection('users').doc(user).set({
-      password: pass,
-      namaRekening,
-      rekening,
-      bank,
-      phone,
-      balance: 0,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert('Akun berhasil didaftarkan');
-    showPage('home');
-  }catch(err){ console.error(err); alert('Gagal daftar'); }
-}
-
-// Logout
-function logout(){
-  currentUser=null; 
-  alert('Logout berhasil'); 
-  showPage('home'); 
-}
-
-// Show Withdraw
-function showWithdraw(){
-  if(!currentUser){ alert('Login dulu'); return; }
-  document.getElementById('withdrawRekening').innerText = `Rek: ${currentUser.rekening || '-'} (${currentUser.bank || '-'})`;
-  document.getElementById('withdrawNama').innerText = `User: ${currentUser.user}`;
-  showPage('withdraw');
-}
-
-// Deposit (buat dokumen pending)
-async function konfirmasiDeposit(){
-  if(!currentUser){ alert('Login dulu'); return; }
-  const amt = parseInt(document.getElementById('depositAmount').value);
-  if(!amt || amt <=0){ alert('Masukkan nominal'); return; }
-
-  try{
-    await db.collection('deposits').add({
-      user: currentUser.user,
-      amount: amt,
-      status: 'pending',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert(`Deposit Rp ${amt} dicatat. Tunggu approval admin.`);
-    showPage('userarea');
-  }catch(err){ console.error(err); alert('Gagal mencatat deposit'); }
-}
-
-// Withdraw (buat dokumen pending)
-async function konfirmasiWithdraw(){
-  if(!currentUser){ alert('Login dulu'); return; }
-  const amt = parseInt(document.getElementById('withdrawAmount').value);
-  if(!amt || amt <=0){ alert('Masukkan nominal'); return; }
-  if(amt > (currentUser.balance || 0)){ alert('Saldo tidak cukup'); return; }
-
-  try{
-    await db.collection('withdraws').add({
-      user: currentUser.user,
-      amount: amt,
-      status: 'pending',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    alert(`Withdraw Rp ${amt} dicatat. Tunggu approval admin.`);
-    showPage('userarea');
-  }catch(err){ console.error(err); alert('Gagal mencatat withdraw'); }
-}
-
-// Show History
-function showHistory(){
-  if(!currentUser){ alert('Login dulu'); return; }
-  showPage('userarea');
-}
-</script>
-
+      await db.collection('withdraws').add({
+        user: currentUser.username,
+        amount,
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      alert("Withdraw dikirim. Tunggu konfirmasi admin.");
+      showPage('userPage');
+    }
+  </script>
 </body>
 </html>
+
