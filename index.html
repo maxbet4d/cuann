@@ -3,120 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>MAXBET4D - Full Web Firebase</title>
-
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBC8UXFcrJaxMsJsTQgnqaaNvgsAVz0vOE",
-      authDomain: "ariptoto-web.firebaseapp.com",
-      projectId: "ariptoto-web",
-      storageBucket: "ariptoto-web.appspot.com",
-      messagingSenderId: "129200594109",
-      appId: "1:129200594109:web:50f7f4ce89a384211b2bd4"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    let currentUser = null;
-  </script>
-
+  <title>MAXBET4D - Modern UI</title>
   <style>
-    body {
+    :root {
+      /* Variabel warna */
+      --color-bg: #0f1224;
+      --color-primary: #ffcc00;
+      --color-secondary: #2a2a2a;
+      --color-accent: #00cc66;
+      --color-text-light: #ffffff;
+      --color-text-muted: #cccccc;
+      --radius: 8px;
+      --transition-speed: 0.3s;
+      --box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0f1c;
-      color: white;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-light);
+      line-height: 1.5;
       overflow-x: hidden;
-      touch-action: manipulation;
-      -ms-touch-action: manipulation;
     }
 
     header {
-      background: #111a33;
-      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
+      background: var(--color-secondary);
+      box-shadow: var(--box-shadow);
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
     }
 
     .logo img {
-      height: 100px;
+      height: 80px;
       width: auto;
-      display: block;
     }
 
     .header-right {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-      flex-grow: 1;
+      align-items: center;
+      gap: 1rem;
     }
 
     .login-form {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .login-form input {
-      padding: 6px;
-      border-radius: 5px;
-      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid #444;
+      background: #1a1a1a;
+      color: var(--color-text-light);
+      transition: border 0.2s;
+    }
+
+    .login-form input:focus {
       outline: none;
-      min-width: 100px;
-      max-width: 150px;
-      flex: 1 1 auto;
+      border-color: var(--color-primary);
     }
 
     .login-form button {
-      padding: 6px 12px;
+      padding: 0.5rem 1.25rem;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      border-radius: var(--radius);
+      background: var(--color-primary);
+      color: var(--color-bg);
       font-weight: bold;
-      transition: all 0.3s ease;
-      max-width: 120px;
-      flex: 1 1 auto;
+      cursor: pointer;
+      transition: transform var(--transition-speed), background var(--transition-speed);
     }
 
-    .btn-login {
-      background: #ff4444;
-      color: white;
-    }
-
-    .btn-daftar {
-      background: #00cc66;
-      color: white;
+    .login-form button:hover {
+      background: var(--color-accent);
+      transform: scale(1.05);
     }
 
     .btn-wa {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 16px;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
       background: #25D366;
-      color: white;
-      font-weight: bold;
-      border-radius: 6px;
+      color: var(--color-text-light);
       text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 14px;
+      transition: background var(--transition-speed), transform var(--transition-speed);
     }
 
     .btn-wa:hover {
@@ -124,69 +105,130 @@
       transform: scale(1.05);
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .header-right {
-        width: 100%;
-        align-items: center;
-      }
-
-      .login-form {
-        flex-direction: column;
-        width: 100%;
-        gap: 8px;
-      }
-
-      .login-form input,
-      .login-form button {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .btn-wa {
-        width: 100%;
-        text-align: center;
-      }
-
-      .logo img {
-        height: 80px;
-      }
+    .banner {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: var(--color-primary);
+      border-radius: var(--radius);
+      margin: 2rem auto;
+      max-width: 90%;
+      box-shadow: var(--box-shadow);
     }
 
-    /* Tambahan animasi & style lainnya tetap ada nanti */
+    .banner h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .banner p {
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+    }
+
+    .btn-main {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--color-primary);
+      color: var(--color-bg);
+      cursor: pointer;
+      transition: background var(--transition-speed), transform var(--transition-speed);
+    }
+
+    .btn-main:hover {
+      background: var(--color-accent);
+      transform: scale(1.05);
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .game-card {
+      background: #1f1f1f;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    .game-card div {
+      padding: 0.75rem 0.5rem;
+      color: var(--color-text-light);
+      font-weight: bold;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .banner h1 {
+        font-size: 2rem;
+      }
+      .banner p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <!-- HOME PAGE -->
-  <div id="home" class="page active">
-    <header>
-      <div class="logo">
-        <img src="maxbet.png" alt="MAXBET Logo" />
-      </div>
-      <div class="header-right">
-        <form class="login-form">
-          <input type="text" id="userLogin" placeholder="User ID" />
-          <input type="password" id="passLogin" placeholder="Kata Sandi" />
-          <button type="button" class="btn-login" onclick="login()">Login</button>
-          <button type="button" class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
-        </form>
-        <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
-          💬 Hubungi WhatsApp / Live Chat
-        </a>
-      </div>
-    </header>
-    <!-- Banner -->
-    <section style="padding: 20px; text-align: center;">
-      <h1>Selamat Datang di MAXBET4D</h1>
-      <p>Website togel terpercaya dan terbaik di Indonesia.</p>
-      <img src="banner.jpg" alt="Promo Banner" style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.4);" />
-    </section>
+
+  <header>
+    <div class="logo">
+      <img src="maxbet.png" alt="MAXBET Logo" />
+    </div>
+    <div class="header-right">
+      <form class="login-form">
+        <input type="text" id="userLogin" placeholder="User ID" />
+        <input type="password" id="passLogin" placeholder="Kata Sandi" />
+        <button type="button" class="btn-login" onclick="login()">Login</button>
+        <button type="button" class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+      </form>
+      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">
+        💬 Live Chat
+      </a>
+    </div>
+  </header>
+
+  <div class="banner">
+    <h1>🎉 Welcome to MAXBET4D 🎉</h1>
+    <p>Situs terbaik di Asia — Aman & 100% Resmi</p>
+    <button class="btn-main">Main Sekarang</button>
   </div>
+
+  <div class="game-grid">
+    <div class="game-card">
+      <img src="path/to/game1.jpg" alt="Game 1" />
+      <div>Game 1</div>
+    </div>
+    <div class="game-card">
+      <img src="path/to/game2.jpg" alt="Game 2" />
+      <div>Game 2</div>
+    </div>
+    <!-- game-card lainnya -->
+  </div>
+
 
   <!-- FORM DAFTAR -->
   <div id="daftar" class="page" style="display:none;">
