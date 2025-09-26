@@ -31,19 +31,24 @@ header {
   background: #111a33;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* rapat kiri */
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   flex-wrap: wrap;
-  gap: 10px; /* Tambahkan sedikit gap antar elemen */
+  gap: 20px;
 }
 
 .logo img {
-  height: 100px; /* Ukuran lebih kecil agar tidak mengganggu layout */
+  height: 100px;
   width: auto;
+  display: block;
+}
+
+.logo {
+  margin-right: 20px;
 }
 /* Bagian kanan */
 .header-right {
