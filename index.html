@@ -236,6 +236,21 @@
       <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
     </div>
   </header>
+  <!-- Form Daftar (disembunyikan default) -->
+<div id="registerPage" style="display:none; background:#121224; padding:20px; border-radius:8px; max-width:400px; margin: 1rem auto; color: #eee;">
+  <h2>Daftar Akun Baru</h2>
+  <form id="registerForm">
+    <input type="text" id="regUserId" placeholder="User ID" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
+    <input type="email" id="regEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
+    <input type="password" id="regPassword" placeholder="Kata Sandi" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
+    <input type="password" id="regConfirmPassword" placeholder="Konfirmasi Kata Sandi" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background:#121224; color:#eee;">
+    <button type="submit" style="background: var(--color-primary); color: #000; padding: 10px; border:none; border-radius: 8px; cursor:pointer; width: 100%; font-weight:bold;">Daftar</button>
+  </form>
+  <p style="margin-top: 10px; text-align: center;">
+    Sudah punya akun? 
+    <span style="color: var(--color-primary); cursor:pointer;" onclick="showPage('login')">Login di sini</span>
+  </p>
+</div>
 
   <div class="banner">
     <h1>🎉 Selamat Datang di MAXBET4D 🎉</h1>
